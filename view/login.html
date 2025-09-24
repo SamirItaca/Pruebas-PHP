@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/login.css">
+        <title>Login</title>
+    </head>
+
+    <body>
+        
+        <div class="wrapper">
+
+            <form id="loginForm">
+
+                <h1>Login</h1>
+
+                <div class="input-box">
+                    <input type="text" id="username" placeholder="Usuario" required>
+                    <i class="bx bxs-user"></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="text" id="password" placeholder="Contraseña" required>
+                    <i class="bx bxs-lock-alt"></i>
+                </div>
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Recordar</label>
+                    <a href="#">Olvide mi contraseña</a>
+                </div>
+
+                <button type="submit" class="btn">Login</button>
+
+                <div class="register-link">
+                    <p>Tienes cuenta? <a href="#">Registrarse</a> </p>
+                </div>
+                
+                <div id="loginResult"></div>
+
+            </form>
+
+        </div>
+
+        <script>
+            const loginForm = document.getElementById('loginForm');
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username })
+                });
+
+                const result = await response.json();
+                document.getElementById('loginResult').innerText = result.message;
+            });
+        </script>
+
+    </body>
+
+</html>
