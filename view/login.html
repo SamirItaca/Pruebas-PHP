@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../styles/login.css">
         <title>Login</title>
+        <script src="../js/login.js" defer></script>
     </head>
 
     <body>
@@ -35,7 +36,7 @@
                 <button type="submit" class="btn">Login</button>
 
                 <div class="register-link">
-                    <p>Tienes cuenta? <a href="#">Registrarse</a> </p>
+                    <p>Tienes cuenta? <a href="http://localhost:8000/view/createUser.html">Registrarse</a> </p>
                 </div>
                 
                 <div id="loginResult"></div>
@@ -45,21 +46,7 @@
         </div>
 
         <script>
-            const loginForm = document.getElementById('loginForm');
-
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ username })
-                });
-
-                const result = await response.json();
-                document.getElementById('loginResult').innerText = result.message;
-            });
+            
         </script>
 
     </body>

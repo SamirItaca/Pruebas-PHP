@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear usuario</title>
+    <script src="../js/createUser.js" defer></script>
+    <script src="../view/components/card.js" defer></script>
+
+    <!-- Material Design CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.css">
+
+    <!-- Material Design JS -->
+    <script src="https://cdn.jsdelivr.net/npm/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+</head>
+<body>
+
+    <form id="form-crear-usuario">
+        <div class="mdc-text-field mdc-text-field--outlined">
+            <input type="text" id="nombre" class="mdc-text-field__input" required>
+            <label class="mdc-floating-label" for="nombre">Nombre</label>
+            <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch"></div>
+            <div class="mdc-notched-outline__trailing"></div>
+            </div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--outlined">
+            <input type="email" id="email" class="mdc-text-field__input" required>
+            <label class="mdc-floating-label" for="email">Correo electrónico</label>
+            <div class="mdc-notched-outline">
+            <div class="mdc-notched-outline__leading"></div>
+            <div class="mdc-notched-outline__notch"></div>
+            <div class="mdc-notched-outline__trailing"></div>
+            </div>
+        </div>
+
+        <button class="mdc-button mdc-button--raised" type="submit">
+            <span class="mdc-button__label">Crear usuario</span>
+        </button>
+    </form>
+
+    <mi-card>
+        <span slot="titulo">Mi tarjeta personalizada</span>
+        <span slot="contenido">Este es el contenido que quiero mostrar</span>
+    </mi-card>
+
+</body>
+</html>
