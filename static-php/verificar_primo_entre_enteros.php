@@ -1,17 +1,7 @@
 <?php
-        function esPrimo($num) {
-            if ($num <= 1) {
-                return false;
-            }
 
-            for ($i = 2; $i <= sqrt($num); $i++) {
-                if ($num % $i == 0) {
-                    return false; 
-                }
-            }
-            return true;
-        }
-
+    include 'verificar_primo.php';
+    
         function verificarPrimosEntreDosEnteros($num1, $num2) {
             echo "Los numeros primos entre $num1 y $num2 son: <br>";
             for ($num = $num1; $num <= $num2; $num++) {

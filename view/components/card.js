@@ -19,17 +19,23 @@ class Card extends HTMLElement {
         border-radius: 16px;
         padding: 20px 30px;
         }
-        .wrapper h2 {
-          margin-top: 0;
-          font-size: 20px;
+        .titulo {
+          font-size: 1.2em;
+          font-weight: bold;
+          margin-bottom: 12px;
         }
-        .wrapper p {
-          color: #555;
+        .contenido {
+          font-size: 1em;
         }
       </style>
       <div class="wrapper">
-        <h2><slot name="titulo">Título por defecto</slot></h2>
-        <p><slot name="contenido">Contenido por defecto</slot></p>
+        <div class="titulo">
+          <slot name="titulo"></slot>
+        </div>
+        <div class="contenido">
+          <slot name="contenido"></slot>
+          <slot></slot>
+        </div>
       </div>
     `;
   }
