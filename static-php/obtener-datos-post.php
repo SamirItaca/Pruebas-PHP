@@ -9,12 +9,32 @@
 <body>
     
     <?php
-        $datos = array();
+        session_start();
+
+        if(!isset($_SESSION['datos_totales'])){
+            $_SESSION['datos_totales'] = [];
+        }
 
         function imprimirTabla($datos) {
             $contenido = '';
-            for ($i = 0; $i < count($datos); $i++) {
-                $contenido .= "<td>{$datos[$i]}</td>";
+            $id;
+            
+            foreach ($datos as $fila) { // cada fila es [number, name, lastname]
+                $contenido .= "<tr>";
+                foreach ($fila as $columna) {
+                    $contenido .= "<td>{$columna}</td>";
+
+                    if (is_int($columna)) {
+                        $id = $columna;
+                    }
+                }
+
+                $button = ' <form action="obtener-datos-post.php" method="post">
+                                <input type="submit" name="' . $id . '" value="Eliminar">
+                            </form>'; 
+
+                $contenido .= "<td>{$button}</td>";
+                $contenido .= "</tr>";
             }
             return $contenido;
         }
@@ -25,14 +45,10 @@
             $name = $_POST['name'] ?? '';
             $lastname = $_POST['lastname'] ?? '';
 
-            $datos[] = $number;
-            $datos[] = $name;
-            $datos[] = $lastname;
-            
-            //print_r($datos);
+            $_SESSION['datos_totales'][] = [$number, $name, $lastname];
         }
 
-        if (count($datos) > 0) {
+        if (count($_SESSION['datos_totales']) > 0) {
             $tabla = "
                 <table>
                     <tr>
@@ -41,7 +57,7 @@
                         <th>Apellido</th>
                     </tr>
                     <tr>"  
-                        . imprimirTabla($datos) .
+                        . imprimirTabla($_SESSION['datos_totales']) .
                     "</tr>
                 </table>
             ";
