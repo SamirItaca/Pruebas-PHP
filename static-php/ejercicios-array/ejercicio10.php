@@ -1,10 +1,11 @@
 <?php
 
     $numeros = [10, 20, 30, 40, 50];
+    $numerosDuplicados = [];
 
     foreach ($numeros as $num) {
-        $numeros[] = $num;
+        $numerosDuplicados[] = $num * 2;
     }
 
-    print_r($numeros);
+    print_r($numerosDuplicados);
 ?>
