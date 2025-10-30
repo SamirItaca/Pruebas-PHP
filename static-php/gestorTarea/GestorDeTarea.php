@@ -29,11 +29,23 @@
         return null;
     }
 
-    function eliminarTodasLasTareaEnCola() {
+    function eliminarTodasLasTareaEnCola() {    
         global $SESSION_KEY;
 
         // Vaciar la lista de tareas en sesión
         $_SESSION[$SESSION_KEY] = [];
+    }
+
+    function eliminarUnaTarea($id) {
+        global $SESSION_KEY;
+
+        // Verificamos que el índice exista antes de eliminar
+        if (isset($_SESSION[$SESSION_KEY][$id])) {
+            unset($_SESSION[$SESSION_KEY][$id]);
+
+            // Reindexamos el array para evitar huecos
+            $_SESSION[$SESSION_KEY] = array_values($_SESSION[$SESSION_KEY]);
+        }
     }
 
     function guardarTareaEnFichero($nombreFichero) {
@@ -98,7 +110,7 @@
             if (count($_SESSION[$SESSION_KEY]) > 0) {
                 echo '<div class="accordion" id="accordionExample">';
 
-                $index = 1; // para crear IDs únicos en cada tarea
+                $index = 0; // para crear IDs únicos en cada tarea
 
                 foreach ($_SESSION[$SESSION_KEY] as $tarea) {
                     $collapseId = "collapse" . $index;
@@ -112,10 +124,18 @@
                             </button>
                         </h2>
                         <div id="' . $collapseId . '" class="accordion-collapse collapse" aria-labelledby="' . $headingId . '" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>Descripción:</strong> ' . nl2br(htmlspecialchars($tarea->descripcion)) . '
+                            <div class="accordion-body form-delete-tarea">
+                                <div>
+                                    <strong>Descripción:</strong> ' . nl2br(htmlspecialchars($tarea->descripcion)) . '
+                                </div>
+
+                                <form action="GestorDeTarea.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="idTareaBorrar" value="'. $index .'">
+                                    <button type="submit" class="btn-close" aria-label="Close"></button>
+                                </form>
                             </div>
                         </div>
+
                     </div>';
 
                     $index++;
@@ -145,6 +165,13 @@
         // Borrar tareas en cola
         if (isset($_POST['borrarTodasTareasBtn'])) {
             eliminarTodasLasTareaEnCola();
+        }
+
+        // Borrar una sola tarea
+        if (isset($_POST['idTareaBorrar']) && is_numeric($_POST['idTareaBorrar'])) {
+            $id = intval($_POST['idTareaBorrar']);
+
+            eliminarUnaTarea($id);
         }
 
         // Guardar tarea en fichero
