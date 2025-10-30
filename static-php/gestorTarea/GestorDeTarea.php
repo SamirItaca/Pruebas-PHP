@@ -221,6 +221,7 @@
         <div class="card" style="padding: 8px;">
             <h2>Lista de tareas en cola</h2>
 
+            <!-- Imprimir tareas en cola (session) -->
             <?php verListaDeTareas() ?>
         </div>
     </div>
@@ -228,7 +229,8 @@
     <!-- Contenido datos del fichero -->
     <div class="card contenido">
         <h2>Contenido del fichero</h2>
-                    
+        
+        <!-- Imprimir tareas dentro del fichero -->
         <?php 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Ver tareas en el fichero
@@ -240,4 +242,5 @@
     </div>
   
 </body>
+
 </html>
