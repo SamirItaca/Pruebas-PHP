@@ -36,7 +36,7 @@
         $_SESSION[$SESSION_KEY] = [];
     }
 
-    function eliminarUnaTarea($id) {
+    function eliminarUnaTarea($id, $nombreFichero) {
         global $SESSION_KEY;
 
         // Verificamos que el índice exista antes de eliminar
@@ -45,6 +45,16 @@
 
             // Reindexamos el array para evitar huecos
             $_SESSION[$SESSION_KEY] = array_values($_SESSION[$SESSION_KEY]);
+
+            // Actualizar fichero con el array actualizado
+            $nuevoContenidoFichero = "";
+            foreach ($_SESSION[$SESSION_KEY] as $tarea) {
+                $nuevoContenidoFichero .= "Nombre de la tarea: " . $tarea->nombre . ", descripción: " . $tarea->descripcion . PHP_EOL;
+            }
+
+            $fichero = fopen($nombreFichero, "w") or die("No se pudo abrir el fichero");
+            fwrite($fichero, $nuevoContenidoFichero);
+            fclose($fichero);
         }
     }
 
@@ -70,7 +80,7 @@
         fclose($fichero);
 
         // Vaciar la lista de tareas en sesión
-        $_SESSION[$SESSION_KEY] = [];
+        //$_SESSION[$SESSION_KEY] = [];
     }
 
     function verTareaFichero($nombreFichero) {
@@ -171,7 +181,7 @@
         if (isset($_POST['idTareaBorrar']) && is_numeric($_POST['idTareaBorrar'])) {
             $id = intval($_POST['idTareaBorrar']);
 
-            eliminarUnaTarea($id);
+            eliminarUnaTarea($id, "tareas.txt");
         }
 
         // Guardar tarea en fichero
