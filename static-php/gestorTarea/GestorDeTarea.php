@@ -9,6 +9,54 @@
 </head>
 
 <?php
+
+    class GestorTarea {
+        
+        private $fichero = "tareas.txt";
+
+        public function __construct($fichero) {
+            $this -> fichero = $fichero;
+        }
+
+        function guardarTareaEnFichero($listaDeTareas) {
+
+            $texto = "";
+
+            if(isset($listaDeTareas)){
+                
+                if (count($listaDeTareas)) {
+
+                    foreach ($listaDeTareas as $tarea) {
+                        $texto .= "Nombre de la tarea: " . $tarea->nombre . ", descripción: " . $tarea->descripcion . PHP_EOL;
+                    }
+
+                }
+            }
+
+            $fichero = fopen($this -> fichero, "a") or die("No se pudo abrir el fichero");
+
+            fwrite($fichero, $texto);
+            fclose($fichero);
+        }
+
+        function verTareaFichero() {
+            // Verificar que el archivo existe
+            if (!file_exists($this -> fichero)) {
+                echo "<pre style='padding:10px; background:#f8f8f8; border:1px solid #ccc;'>No existe el archivo de tareas.</pre>";
+                return;
+            }
+
+            // Leer el contenido del archivo
+            $contenido = file_get_contents($this -> fichero);
+
+            // Escapar caracteres HTML para seguridad
+            $contenido = htmlspecialchars($contenido);
+
+            // Mostrar dentro de <pre>
+            echo "<pre style='padding:10px; background:#f8f8f8; border:1px solid #ccc; max-height:400px; overflow:auto;'>{$contenido}</pre>";
+        }
+    }
+
     require_once "Tarea.php";
 
     session_start();
