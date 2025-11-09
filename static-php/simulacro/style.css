@@ -1,0 +1,10 @@
+.content {
+    padding: 16px;
+}
+
+.item_lista {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 4px;
+}
