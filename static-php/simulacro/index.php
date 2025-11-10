@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gestor -> consultarAlumno($id);
             break;
         case $_SESSION['valueInputActualizarAlumno']: 
-            $gestor -> actualizarAlumno($id);
+            $gestor -> irActualizarAlumno($id);
             break;
         case $_SESSION['valueInputLeerAlumno']: 
             $gestor -> leerAlumno();
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gestor -> consultarModulo($id);
             break;
         case $_SESSION['valueInputActualizarModulo']: 
-            $gestor -> actualizarModulo($id);
+            $gestor -> irActualizarModulo($id);
             break;
         case $_SESSION['valueInputLeerModulo']: 
             $gestor -> leerModulo();

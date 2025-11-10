@@ -79,13 +79,48 @@ class Gestor{
         }
     }
 
-    public function actualizarAlumno($id) {
+    public function irActualizarAlumno($id) {
         if ($this->existeAlumno($id)) {
+            $_SESSION['alumnoSeleccionadoId'] = $id;
 
-        } else {
-
+            header("Location: actualizar_alumno.php");
+            exit;
         }
     }
+
+    public function actualizarAlumno($id, $nuevoNombre, $nuevoApellido, $modulosSeleccionados) {
+
+        if (!$this->existeAlumno($id)) {
+            return;
+        }
+
+        // Buscar el alumno en la lista
+        foreach ($this->listaAlumnos as $alumno) {
+            if ($alumno->id == $id) {
+
+                // Actualizar nombre y apellido
+                $alumno->nombre = $nuevoNombre;
+                $alumno->apellido = $nuevoApellido;
+
+                // Convertir IDs a objetos Modulo
+                $nuevosModulos = [];
+                foreach ($this->listaModulos as $modulo) {
+                    if (in_array($modulo->id, $modulosSeleccionados)) {
+                        $nuevosModulos[] = $modulo;
+                    }
+                }
+
+                // Asignar los nuevos módulos
+                $alumno->modulos = $nuevosModulos;
+
+                $this->mensajeEstado = new Mensaje("Alumno actualizado correctamente", "correcto");
+                return;
+            }
+        }
+
+        $this->mensajeEstado = new Mensaje("No se encontró el alumno a actualizar", "error");
+    }
+
 
     public function leerAlumno() {
         
@@ -137,12 +172,34 @@ class Gestor{
         }
     }
 
-    public function actualizarModulo($id) {
+    public function irActualizarModulo($id) {
         if ($this->existeModulo($id)) {
+            $_SESSION['moduloSeleccionadoId'] = $id;
 
-        } else {
-
+            header("Location: actualizar_modulo.php");
+            exit;
         }
+    }
+
+    public function actualizarModulo($id, $nuevoNombre, $nuevoCurso) {
+        if (!$this->existeModulo($id)) {
+            return;
+        }
+
+        // Buscar el alumno en la lista
+        foreach ($this->listaModulos as $modulo) {
+            if ($modulo->id == $id) {
+
+                // Actualizar nombre y curso
+                $modulo->nombre = $nuevoNombre;
+                $modulo->curso = $nuevoCurso;
+
+                $this->mensajeEstado = new Mensaje("Modulo actualizado correctamente", "correcto");
+                return;
+            }
+        }
+
+        $this->mensajeEstado = new Mensaje("No se encontró el modulo a actualizar", "error");
     }
 
     public function leerModulo() {
