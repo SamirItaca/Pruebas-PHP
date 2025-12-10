@@ -2,13 +2,13 @@
 
     trait LoggerA {
         public function log() {
-
+            echo "logger A <br>";
         }
     }
 
     trait LoggerB {
         public function log() {
-            
+            echo "logger B <br>";
         }
     }
 

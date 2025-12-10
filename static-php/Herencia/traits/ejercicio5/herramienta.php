@@ -2,7 +2,7 @@
 
     trait Debug {
         public function mostrarInfoPublica() {
-
+            echo "Info publica <br>";
         }
     }
 
@@ -26,6 +26,6 @@
     $h->probarMetodo();
 
     // Esto produce un error:
-    // $h->mostrarInfoPublica();
+    $h->mostrarInfoPublica();
 
 ?>

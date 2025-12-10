@@ -2,11 +2,11 @@
 
     trait Timestamp {
         public function crearFecha() {
-
+            echo "Crear fecha <br>";
         }
 
         public function actualizarFecha() {
-            
+            echo "Actualizar fecha <br>";
         }
     }
 

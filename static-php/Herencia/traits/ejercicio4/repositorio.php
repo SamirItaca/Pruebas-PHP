@@ -17,6 +17,6 @@
     }
 
     $r = new Repositorio();
-    $r->conectar();
+    echo $r->conectar();
 
 ?>
