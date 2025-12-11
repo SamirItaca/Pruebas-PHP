@@ -10,7 +10,8 @@
         }
 
         public function enviar(string $destinatario): bool {
-            echo "Enviando SMS con mensaje: '{$this->mensaje}' a: {$destinatario}";
+            $this->registrar($this->mensaje);
+            echo "Enviando SMS con mensaje: '{$this->mensaje}' a: {$destinatario} - ";
             return true;
         }
     }
